@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta property="og:title" content="María de Nazaret peregrina">
+<meta property="og:description" content="Vigilia y Misa en Madrid (23 y 24 de enero de 2027) y recorrido de la imagen por nueve ciudades de España.">
+<meta property="og:image" content="img/cartel.jpg">
+<meta name="theme-color" content="#060c20">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%23060c20%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22%23d9b76c%22 font-family=%22Georgia%22%3EM%3C/text%3E%3C/svg%3E">
+<title>María de Nazaret peregrina</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="La imagen peregrina María de Nazaret y la reliquia de la Casa de Nazaret recorren España de enero a marzo de 2027: vigilia y Misa en Madrid y recorrido por nueve ciudades.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+<style>
+/* Layout: nocturno editorial — cartel a la derecha del umbral; el recorrido es un mapa 3D fijo que la lectura va encendiendo ciudad a ciudad */
+:root{
+  color-scheme:dark;
+  --night:#060c20;        /* fondo: azul noche del cartel */
+  --night-2:#0b1530;      /* superficies */
+  --night-3:#13214a;      /* tierra del mapa / bordes */
+  --ink:#f1e9d6;          /* texto principal (marfil) */
+  --muted:#b4a98f;        /* texto secundario */
+  --gold:#d9b76c;         /* acento único: oro */
+  --gold-soft:color-mix(in srgb,var(--gold) 22%,transparent);
+  --line:color-mix(in srgb,var(--gold) 26%,transparent);
+  --wine:#8d2a24;         /* lamparillas rojas del cartel, uso mínimo */
+  --font-display:"Cinzel","Trajan Pro",Georgia,serif;
+  --font-body:"Cormorant Garamond","EB Garamond",Georgia,serif;
+  --step-hero:clamp(3.2rem,9vw,8.6rem);
+  --step-h2:clamp(2.2rem,5.4vw,4.6rem);
+  --step-h3:clamp(1.7rem,2.8vw,2.5rem);
+  --step-body:clamp(1.15rem,1.25vw,1.35rem);
+  --step-small:.95rem;
+  --space-1:.5rem;--space-2:1rem;--space-3:1.5rem;--space-4:2.5rem;--space-5:4rem;--space-6:6.5rem;
+  --section-y:clamp(5rem,13vh,10rem);
+  --maxw:1320px;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --dur-ui:380ms;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--ink);font-family:var(--font-body);font-size:var(--step-body);line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--night)}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px;border-radius:2px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.kicker{font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;text-wrap:balance;margin:0;letter-spacing:.01em}
+h2{font-size:var(--step-h2);line-height:1}
+p{margin:0;max-width:62ch}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);width:min(320px,60%)}
+.ref{font-variant:small-caps;letter-spacing:.06em;color:var(--muted)}
+
+/* nav */
+.nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;background:color-mix(in srgb,var(--night) 82%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);min-height:60px}
+.brand{font-family:var(--font-display);font-weight:600;letter-spacing:.14em;font-size:.95rem;color:var(--ink);text-decoration:none;text-transform:uppercase;white-space:nowrap}
+.brand span{color:var(--gold)}
+.nav ul{display:flex;gap:clamp(.8rem,2vw,2rem);list-style:none;margin:0;padding:0}
+.nav ul a{color:var(--muted);text-decoration:none;font-family:var(--font-display);font-size:.8rem;letter-spacing:.16em;text-transform:uppercase;padding:.8rem 0;display:block;transition:color var(--dur-ui) var(--ease-out)}
+.nav ul a:hover{color:var(--ink)}
+@media (max-width:760px){.nav ul li:not(.keep){display:none}}
+
+/* hero */
+.hero{position:relative;padding-top:calc(60px + clamp(2.5rem,8vh,6rem));padding-bottom:var(--section-y);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:80vw;height:110vh;background:radial-gradient(closest-side,color-mix(in srgb,var(--gold) 16%,transparent),transparent 70%);pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,5rem);align-items:center;position:relative}
+.hero h1{font-size:var(--step-hero);line-height:.9;letter-spacing:-.01em;margin:var(--space-3) 0}
+.hero h1 em{display:block;font-style:normal;color:var(--gold)}
+.lead{font-size:clamp(1.35rem,2vw,1.75rem);line-height:1.4;font-style:italic;color:var(--ink);max-width:30ch}
+.dates{display:flex;flex-wrap:wrap;gap:var(--space-2);margin:var(--space-4) 0}
+.date{border:1px solid var(--line);padding:.9rem 1.2rem;min-width:0;flex:1 1 210px;background:color-mix(in srgb,var(--night-2) 70%,transparent)}
+.date b{display:block;font-family:var(--font-display);font-weight:600;font-size:1.05rem;letter-spacing:.06em;color:var(--gold)}
+.date span{font-size:1.05rem;color:var(--muted)}
+.ctas{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.btn{display:inline-flex;align-items:center;gap:.6rem;min-height:48px;padding:0 1.5rem;font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);color:var(--night);background:var(--gold);transition:transform var(--dur-ui) var(--ease-out),background var(--dur-ui)}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn:hover{transform:translateY(-2px)}
+.poster{perspective:1400px;justify-self:center;width:min(100%,460px)}
+.poster-card{position:relative;transform-style:preserve-3d;transform:rotateY(-9deg) rotateX(3deg);transition:transform .9s var(--ease-out);box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px var(--line);will-change:transform}
+.poster-card img{width:100%;aspect-ratio:2/3;object-fit:cover}
+.poster-card::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,240,200,.16) 48%,transparent 60%);background-size:250% 100%;background-position:var(--shine,80%) 0;pointer-events:none}
+.poster figcaption{font-size:var(--step-small);color:var(--muted);margin-top:var(--space-2);text-align:center;font-style:italic}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.poster{width:min(86%,380px)}}
+
+section{padding-block:var(--section-y);position:relative}
+.sec-head{display:grid;gap:var(--space-3);margin-bottom:var(--space-5)}
+
+/* madrid */
+#madrid{background:linear-gradient(180deg,var(--night),var(--night-2))}
+.madrid-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,5vw,5rem);align-items:start}
+.madrid-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;filter:saturate(.85) contrast(1.05)}
+.madrid-photo figcaption{font-size:var(--step-small);color:var(--muted);margin-top:.6rem}
+.events{display:grid;gap:0}
+.event{display:grid;grid-template-columns:minmax(7.5rem,auto) minmax(0,1fr);gap:var(--space-4);padding:var(--space-4) 0;border-top:1px solid var(--line)}
+.event:last-child{border-bottom:1px solid var(--line)}
+.event time{font-family:var(--font-display);line-height:1;color:var(--gold)}
+.event time b{display:block;font-size:clamp(3.4rem,6vw,5.2rem);font-weight:600}
+.event time span{font-size:.85rem;letter-spacing:.2em;text-transform:uppercase}
+.event h3{font-size:var(--step-h3);line-height:1.1;margin-bottom:.6rem}
+.event p{color:var(--muted)}
+.event .hour{display:inline-block;margin-top:.8rem;font-family:var(--font-display);font-weight:600;letter-spacing:.1em;color:var(--ink)}
+.place{margin-top:var(--space-4);display:flex;flex-wrap:wrap;gap:var(--space-2) var(--space-4);align-items:baseline}
+.place strong{font-family:var(--font-display);font-weight:600;letter-spacing:.06em}
+@media (max-width:860px){.madrid-grid{grid-template-columns:1fr}.madrid-photo img{aspect-ratio:16/11}.event{grid-template-columns:1fr;gap:var(--space-2)}}
+
+/* imagen */
+.imagen-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(2rem,6vw,6rem);align-items:center}
+.imagen-photo{position:relative}
+.imagen-photo img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.imagen-photo::before{content:"";position:absolute;inset:-14px 14px 14px -14px;border:1px solid var(--line);pointer-events:none}
+.quote{font-size:clamp(1.6rem,2.6vw,2.3rem);font-style:italic;line-height:1.25;margin:var(--space-4) 0 var(--space-2);max-width:26ch}
+.ficha{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-5)}
+.ficha h3{font-size:1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--space-2)}
+.ficha dl{margin:0;display:grid;gap:.4rem}
+.ficha div{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px solid color-mix(in srgb,var(--ink) 10%,transparent);padding-bottom:.35rem;font-size:1.08rem}
+.ficha dt{color:var(--muted)}
+.ficha dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:860px){.imagen-grid{grid-template-columns:1fr}.ficha{grid-template-columns:1fr}}
+
+/* recorrido */
+#recorrido{padding-bottom:0;background:var(--night)}
+.route{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);margin-top:var(--space-4)}
+.stage{position:sticky;top:60px;height:calc(100svh - 60px);overflow:hidden;background:radial-gradient(ellipse at 50% 40%,var(--night-2),var(--night) 75%)}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.labels{position:absolute;inset:0;pointer-events:none}
+.lbl{position:absolute;left:0;top:0;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-shadow:0 1px 6px #000,0 0 2px #000;white-space:nowrap;opacity:0;transition:opacity .6s}
+.lbl.on{opacity:.9}.lbl.cur{color:var(--gold);opacity:1}
+.stage-hud{position:absolute;left:clamp(16px,3vw,32px);bottom:clamp(16px,3vw,32px);right:clamp(16px,3vw,32px);display:flex;justify-content:space-between;align-items:end;gap:1rem;pointer-events:none}
+.hud-now{font-family:var(--font-display);font-weight:600;line-height:1}
+.hud-now small{display:block;font-size:.72rem;letter-spacing:.24em;color:var(--gold);margin-bottom:.5rem}
+.hud-now span{font-size:clamp(1.6rem,3.4vw,3rem)}
+.hud-dots{display:flex;gap:7px}
+.hud-dots i{width:9px;height:9px;border-radius:50%;border:1px solid var(--gold);display:block;transition:background .5s,transform .5s}
+.hud-dots i.on{background:var(--gold)}.hud-dots i.cur{transform:scale(1.5);background:var(--ink)}
+.steps{list-style:none;margin:0;padding:0 clamp(16px,3vw,48px) 30vh}
+.step{min-height:88vh;display:flex;align-items:center;padding-block:6vh}
+.card{width:100%;background:color-mix(in srgb,var(--night-2) 92%,transparent);border:1px solid var(--line);transition:border-color .6s,transform .8s var(--ease-out)}
+.step.active .card{border-color:var(--gold)}
+.card figure{margin:0;position:relative;overflow:hidden}
+.card figure img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform 1.4s var(--ease-out)}
+.step.active .card figure img{transform:scale(1.03)}
+.card figcaption{position:absolute;right:0;bottom:0;left:0;padding:1.6rem .8rem .5rem;font-size:.85rem;font-style:italic;text-align:right;color:var(--ink);background:linear-gradient(180deg,transparent,rgba(4,8,20,.8))}
+.card .inset{position:absolute;right:12px;top:12px;width:30%;aspect-ratio:1;border-radius:50%;overflow:hidden;border:2px solid var(--gold)}
+.card .inset img{aspect-ratio:1;height:100%}
+.card-body{padding:clamp(1.2rem,2.4vw,2rem);display:grid;gap:.7rem}
+.card .n{display:flex;align-items:baseline;gap:.9rem;flex-wrap:wrap}
+.card .n b{font-family:var(--font-display);font-size:.8rem;letter-spacing:.2em;color:var(--night);background:var(--gold);padding:.25rem .55rem .15rem}
+.card h3{font-size:var(--step-h3);line-height:1}
+.card .church{font-style:italic;font-size:1.35rem;color:var(--gold);line-height:1.2}
+.card .addr{font-size:1rem;color:var(--muted)}
+.card .when{font-family:var(--font-display);font-weight:600;font-size:.86rem;letter-spacing:.14em;text-transform:uppercase;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.55rem 0}
+.card .radio{font-size:1rem;color:var(--muted);display:flex;gap:.6rem;align-items:center}
+.card .radio svg{flex:none}
+.card .extra{display:grid;gap:.3rem;font-size:1.05rem}
+.card .extra span{display:flex;gap:.6rem}
+.card .extra span::before{content:"✦";color:var(--gold);font-size:.8em}
+@media (max-width:900px){
+  .route{display:block}
+  .stage{top:60px;height:44svh;z-index:3;border-bottom:1px solid var(--line)}
+  .steps{padding:0 max(16px,env(safe-area-inset-left,0px)) 20vh max(16px,env(safe-area-inset-right,0px))}
+  .step{min-height:auto;padding-block:5vh}
+  .hud-now span{font-size:1.4rem}
+}
+.nogl .stage canvas#map3d{display:none}
+
+/* pueblo */
+#pueblo{background:linear-gradient(180deg,var(--night),var(--night-2))}
+.gallery{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--space-2)}
+.gallery figure{margin:0;overflow:hidden;position:relative}
+.gallery img{width:100%;height:100%;object-fit:cover}
+.g1{grid-column:1/6;grid-row:span 2;aspect-ratio:3/4}
+.g2{grid-column:6/13;aspect-ratio:16/9}
+.g3{grid-column:6/9;aspect-ratio:3/4}
+.g4{grid-column:9/13;aspect-ratio:4/3;align-self:start}
+.gallery figcaption{position:absolute;left:0;right:0;bottom:0;padding:1.5rem .9rem .6rem;font-size:.95rem;font-style:italic;background:linear-gradient(180deg,transparent,rgba(4,8,20,.85))}
+@media (max-width:760px){.gallery{grid-template-columns:1fr 1fr}.g1,.g2,.g3,.g4{grid-column:auto;grid-row:auto;aspect-ratio:3/4}.g2{grid-column:1/3;aspect-ratio:16/10}}
+
+/* antes */
+.antes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--space-4)}
+.antes article{border-top:1px solid var(--gold);padding-top:var(--space-3);display:grid;gap:.6rem}
+.antes h3{font-size:var(--step-h3);line-height:1.05}
+.antes p{color:var(--muted)}
+@media (max-width:760px){.antes{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--line);padding-block:var(--space-5) calc(var(--space-4) + env(safe-area-inset-bottom,0px));background:var(--night)}
+.foot{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:var(--space-5)}
+.foot address{font-style:normal;color:var(--muted);line-height:1.6}
+.foot address strong{color:var(--ink);font-family:var(--font-display);font-weight:600;letter-spacing:.08em;display:block;margin-bottom:.4rem}
+.credits{font-size:.85rem;line-height:1.5;color:var(--muted)}
+.credits h3{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+@media (max-width:760px){.foot{grid-template-columns:1fr}}
+
+@supports (animation-timeline:view()){
+  @media (prefers-reduced-motion:no-preference){
+    .rv{animation:rv linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+    @keyframes rv{from{opacity:.25;transform:translateY(28px)}to{opacity:1;transform:none}}
+  }
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:150ms!important}.poster-card{transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Principal"><div class="wrap">
+  <a class="brand" href="#inicio">María <span>de</span> Nazaret</a>
+  <ul>
+    <li><a href="#madrid">Madrid</a></li>
+    <li><a href="#imagen">La imagen</a></li>
+    <li class="keep"><a href="#recorrido">Recorrido</a></li>
+    <li><a href="#pueblo">Galería</a></li>
+  </ul>
+</div></nav>
+
+<main>
+<header class="hero" id="inicio"><div class="wrap">
+  <div>
+    <div class="kicker">Centro de Tierra Santa · enero – marzo 2027</div>
+    <h1>María <em>de Nazaret</em></h1>
+    <p class="lead">La imagen peregrina y la reliquia de la Casa de Nazaret recorren nueve ciudades de España.</p>
+    <div class="dates">
+      <div class="date"><b>Sábado 23 de enero · 18 h</b><span>Vigilia mariana en San Francisco el Grande</span></div>
+      <div class="date"><b>Domingo 24 de enero · 10:30 h</b><span>Misa solemne por Tierra Santa, en La 2</span></div>
+    </div>
+    <div class="ctas"><a class="btn" href="#recorrido">Ver el recorrido</a><a class="btn ghost" href="#madrid">Vigilia en Madrid</a></div>
+  </div>
+  <figure class="poster"><div class="poster-card" id="poster"><img src="img/cartel.jpg" alt="Cartel: Vigilia mariana ante la imagen María de Nazaret, sábado 23 de enero a las 18 h, y Misa solemne por Tierra Santa, domingo 24 de enero a las 10:30 h, en la Basílica de San Francisco el Grande de Madrid" width="900" height="1350" fetchpriority="high"></div>
+  <figcaption>Cartel de la vigilia y la Misa en Madrid</figcaption></figure>
+</div></header>
+
+<section id="madrid"><div class="wrap madrid-grid">
+  <figure class="madrid-photo rv"><img src="img/madrid-san-francisco-el-grande.jpg" alt="Fachada de la Real Basílica de San Francisco el Grande" loading="lazy" width="600" height="900"><figcaption>Real Basílica de San Francisco el Grande · Foto: Javier Pérez Montes, CC BY-SA 4.0</figcaption></figure>
+  <div>
+    <div class="sec-head"><div class="kicker">Primera etapa · Madrid</div><h2>Dos días ante María de Nazaret</h2>
+    <p>Hace más de 25 años estuvo en esta basílica la imagen que hoy se venera en Nazaret. Aquí tienen su sede la Comisaría y el Centro de Tierra Santa, la Asociación Española de Amigos de Tierra Santa y la Orden Ecuestre del Santo Sepulcro de Jerusalén.</p></div>
+    <div class="events">
+      <article class="event"><time datetime="2027-01-23T18:00"><b>23</b><span>enero · sábado</span></time><div><h3>Vigilia mariana ante la imagen María de Nazaret</h3><p>Oración ante la imagen y la reliquia de la Casa de Nazaret.</p><span class="hour">18:00 h</span></div></article>
+      <article class="event"><time datetime="2027-01-24T10:30"><b>24</b><span>enero · domingo</span></time><div><h3>Misa solemne por Tierra Santa</h3><p>Presidida por fr. Francesco Ielpo, Custodio de Tierra Santa, y retransmitida por La 2 de RTVE.</p><span class="hour">10:30 h</span></div></article>
+    </div>
+    <div class="place"><strong>Basílica de San Francisco el Grande</strong><span>C/ San Buenaventura, 1 · 28005 Madrid</span><a href="https://www.google.com/maps/search/?api=1&query=Basilica+San+Francisco+el+Grande+Madrid" target="_blank" rel="noopener">Abrir en el mapa</a></div>
+  </div>
+</div></section>
+
+<section id="imagen"><div class="wrap imagen-grid">
+  <div class="imagen-photo rv"><img src="img/imagen-relicario.jpg" alt="La imagen de María de Nazaret con el relicario de nácar entre dos lamparillas rojas" loading="lazy" width="733" height="1100"></div>
+  <div>
+    <div class="kicker">La imagen y la reliquia</div>
+    <h2 style="margin-top:1rem">Una joven de Nazaret que se pone en camino</h2>
+    <p class="quote">«Ahí tienes a tu madre». <span class="ref">Jn 19,27</span></p>
+    <p>La imagen viaja junto a un relicario de nácar que guarda una reliquia de la Casa de Nazaret. En cada ciudad habrá Misa votiva de la Visitación para acogerla, y en casi todas, rosario retransmitido por Radio María.</p>
+    <div class="ficha">
+      <div><h3>Imagen</h3><dl>
+        <div><dt>Altura</dt><dd>1,10 m</dd></div>
+        <div><dt>Base</dt><dd>52 × 47,5 cm</dd></div>
+        <div><dt>Peso</dt><dd>24 kg</dd></div>
+        <div><dt>Policromía</dt><dd>al óleo</dd></div>
+        <div><dt>Ojos</dt><dd>de cristal</dd></div>
+        <div><dt>Peana</dt><dd>cedro horneado</dd></div>
+      </dl></div>
+      <div><h3>Relicario</h3><dl>
+        <div><dt>Material</dt><dd>nácar</dd></div>
+        <div><dt>Altura</dt><dd>55 cm</dd></div>
+        <div><dt>Diámetro</dt><dd>20 cm</dd></div>
+        <div><dt>Peso</dt><dd>6 kg</dd></div>
+        <div><dt>Contiene</dt><dd>reliquia de la Casa</dd></div>
+      </dl></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="recorrido">
+  <div class="wrap sec-head"><div class="kicker">Recorrido · 17 de enero – 22 de marzo de 2027</div><h2>De Brasília a Madrid, y por España</h2>
+  <p>Baja despacio: el mapa sigue a la imagen ciudad a ciudad. Cada semana cambia de casa franciscana.</p></div>
+  <div class="route" id="route">
+    <div class="stage" id="stage">
+      <canvas id="map3d" aria-hidden="true"></canvas>
+      <canvas id="map2d" aria-hidden="true" hidden></canvas>
+      <div class="labels" id="labels"></div>
+      <div class="stage-hud"><div class="hud-now" aria-live="polite"><small id="hudK">Salida</small><span id="hudC">Brasília</span></div><div class="hud-dots" id="hudDots"></div></div>
+    </div>
+    <ol class="steps" id="steps"></ol>
+  </div>
+</section>
+
+<section id="pueblo"><div class="wrap">
+  <div class="sec-head"><div class="kicker">Peregrinaciones anteriores</div><h2>Allí donde llega, sale el pueblo a su encuentro</h2></div>
+  <div class="gallery">
+    <figure class="g1 rv"><img src="img/procesion.jpg" alt="La imagen llevada en andas entre flores blancas durante una procesión nocturna" loading="lazy"><figcaption>Procesión nocturna con velas</figcaption></figure>
+    <figure class="g2 rv"><img src="img/grupo.jpg" alt="Grupo de voluntarios y un fraile junto a la imagen y el relicario" loading="lazy"><figcaption>Voluntarios que la acompañan</figcaption></figure>
+    <figure class="g3 rv"><img src="img/llegada.jpg" alt="La imagen sale de su estuche acolchado a la puerta de una iglesia" loading="lazy"><figcaption>Llegada en su estuche</figcaption></figure>
+    <figure class="g4 rv"><img src="img/misa.jpg" alt="Un sacerdote sostiene el relicario junto a la imagen durante una Misa con el obispo" loading="lazy"><figcaption>El relicario en la Misa</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="antes"><div class="wrap">
+  <div class="sec-head"><div class="kicker">Para preparar el camino</div><h2>Antes de que llegue</h2></div>
+  <div class="antes">
+    <article class="rv"><div class="kicker">La 2 · domingo 27 de diciembre · 11 h</div><h3>«Últimas preguntas»</h3><p>Entrevista a María Díaz-Ripoll y fr. Luis Quintana, el día de la Sagrada Familia.</p></article>
+    <article class="rv"><div class="kicker">Enero – febrero 2027</div><h3>Dossier en la revista Tierra Santa</h3><p>La historia de la imagen, la reliquia y el sentido del recorrido, en el número de enero y febrero.</p></article>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap foot">
+  <address><strong>Centro de Tierra Santa</strong>Real Basílica de San Francisco el Grande<br>C/ San Buenaventura, 1 · 28005 Madrid<br><a href="https://revistatierrasanta.com" target="_blank" rel="noopener">revistatierrasanta.com</a> · <span>621 09 64 77</span></address>
+  <div class="credits"><h3>Fotografías</h3><p id="credits">Fotos de la imagen y la reliquia: archivo de la peregrinación. Fachadas: Wikimedia Commons.</p></div>
+</div></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+(()=>{
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const RADIO='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8l10-5"/><circle cx="15.5" cy="14" r="3"/><path d="M6 12h4M6 15h4"/></svg>';
+const S=[
+ {city:'Brasília',k:'Salida',ll:[-47.88,-15.79],when:'Domingo 17 – martes 19 de enero',church:'Santuário Santo Antônio',addr:'SGAS 911, Asa Sul · Brasília (Brasil)',note:'Sale en vuelo a São Paulo y cruza el Atlántico con Air Europa. Llega a Madrid la madrugada del martes 19.',img:'img/llegada.jpg',cap:'La imagen, a punto de emprender viaje'},
+ {city:'Madrid',k:'Etapa 1',ll:[-3.714,40.410],when:'19 – 25 de enero',church:'Real Basílica de San Francisco el Grande',addr:'C/ San Buenaventura, 1 · 28005 Madrid',note:'Casa de la Comisaría y del Centro de Tierra Santa.',extra:['Vigilia mariana · sábado 23 · 18 h','Misa por Tierra Santa en La 2 · domingo 24 · 10:30 h'],radio:'jueves 21 de enero, 19 h',img:'img/madrid-san-francisco-el-grande.jpg',cap:'Real Basílica de San Francisco el Grande'},
+ {city:'Toledo',k:'Etapa 2',ll:[-4.030,39.859],when:'25 de enero – 1 de febrero',church:'Monasterio de San Juan de los Reyes',addr:'C/ Reyes Católicos, 17 · 45002 Toledo',note:'Toledo guarda desde 1617 su voto inmaculista. El monasterio está dedicado a san Juan, el discípulo que recibió a María en su casa.',radio:'martes 26 de enero, 19 h',img:'img/toledo-san-juan-de-los-reyes.jpg',cap:'Portada de San Juan de los Reyes'},
+ {city:'Sevilla',k:'Etapa 3',ll:[-5.997,37.392],when:'1 – 8 de febrero',church:'Convento de San Buenaventura',addr:'C/ Carlos Cañal, 15 · 41006 Sevilla',note:'Su catedral celebra la Inmaculada desde 1369, siglos antes del dogma de 1854. Las hermandades marianas la acompañarán.',radio:'miércoles 3 de febrero, 19 h',img:'img/sevilla-san-buenaventura.jpg',cap:'Iglesia de San Buenaventura'},
+ {city:'Granada',k:'Etapa 4',ll:[-3.605,37.176],when:'8 – 15 de febrero',church:'Iglesia de San Francisco de Asís',addr:'Avda. Camino de Ronda, 65 · 18004 Granada',note:'Granada fue la segunda ciudad, tras Toledo, en jurar la defensa de la Inmaculada. Los jóvenes San Francisco preparan la vigilia.',img:'img/granada-catedral.jpg',cap:'Granada · fachada de la catedral'},
+ {city:'Murcia',k:'Etapa 5',ll:[-1.130,37.987],when:'15 – 22 de febrero',church:'Convento de la Merced',addr:'C/ Doctor Fleming, 1 · 30003 Murcia',note:'Centro de estudios superiores vinculado a la Antonianum, donde se forman los franciscanos jóvenes y muchos laicos.',radio:'miércoles 17 de febrero, 19 h',img:'img/murcia-la-merced.jpg',cap:'Portada de la iglesia de la Merced'},
+ {city:'Onteniente',k:'Etapa 6',ll:[-0.606,38.822],when:'22 de febrero – 1 de marzo',church:'Colegio de La Concepción',addr:'Avda. San Francisco, 5 · 46870 Onteniente (Valencia)',note:'La Puríssima es el pilar de la identidad de Onteniente desde el siglo XIII. Actos marianos con los alumnos de cada curso.',radio:'miércoles 24 de febrero, 19 h',img:'img/onteniente-la-vila.jpg',cap:'Ontinyent · la Vila y Santa María'},
+ {city:'Sabadell',k:'Etapa 7',ll:[2.109,41.548],when:'1 – 8 de marzo',church:'Parroquia San Francisco de Asís',addr:'C/ Sta. Cecilia, 15 · 08204 Sabadell (Barcelona)',note:'Barcelona ya celebraba la Inmaculada en 1281. La visitarán los alumnos del colegio Sant Francesc.',radio:'martes 2 de marzo, 19 h',img:'img/sabadell-sant-francesc.jpg',cap:'Parròquia de Sant Francesc d’Assís'},
+ {city:'Zaragoza',k:'Etapa 8',ll:[-0.884,41.640],when:'8 – 15 de marzo',church:'Franciscanos de Zaragoza',addr:'C/ Pedro Arnal Cavero, 14 · 50014 Zaragoza',note:'Tierra del Pilar, donde según la tradición María alentó al apóstol Santiago. La visitarán los niños del colegio La Purísima y San Antonio.',radio:'miércoles 10 de marzo, 19 h',img:'img/zaragoza-san-antonio.jpg',cap:'Iglesia de San Antonio de Padua',inset:'img/zaragoza-pilar.jpg'},
+ {city:'Madrid',k:'Etapa 9',ll:[-3.678,40.419],when:'15 – 22 de marzo',church:'Parroquia San Antonio del Retiro',addr:'C/ Duque de Sesto, 9 · 28009 Madrid',note:'Curia de la Provincia franciscana de la Inmaculada Concepción: aquí termina el recorrido por España. Anima la fraternidad seglar.',radio:'miércoles 17 de marzo, 19 h',img:'img/madrid-retiro.jpg',cap:'Madrid · Parque del Retiro'},
+ {city:'San Sebastián',k:'Después',ll:[-1.982,43.318],when:'Desde el 22 de marzo',church:'Franciscanos de San Sebastián',addr:'Paseo Duque de Mandas, 39 · 20002 San Sebastián',note:'La peregrinación continúa hacia el norte.',img:null}
+];
+// build steps
+const ol=document.getElementById('steps'),dotsEl=document.getElementById('hudDots');
+S.forEach((s,i)=>{const li=document.createElement('li');li.className='step';li.dataset.i=i;
+ li.innerHTML=`<article class="card">${s.img?`<figure><img src="${s.img}" alt="${s.cap}" loading="lazy">${s.inset?`<div class="inset"><img src="${s.inset}" alt="Basílica del Pilar" loading="lazy"></div>`:''}<figcaption>${s.cap}</figcaption></figure>`:''}
+ <div class="card-body"><div class="n"><b>${s.k}</b><h3>${s.city}</h3></div><div class="church">${s.church}</div><div class="addr">${s.addr}</div>
+ <div class="when">${s.when}</div><p>${s.note}</p>${s.extra?`<div class="extra">${s.extra.map(e=>`<span>${e}</span>`).join('')}</div>`:''}
+ ${s.radio?`<div class="radio">${RADIO}<span>Rosario en Radio María · ${s.radio}</span></div>`:''}</div></article>`;
+ ol.appendChild(li);const d=document.createElement('i');dotsEl.appendChild(d);});
+
+// poster tilt
+const pc=document.getElementById('poster');
+if(!RM&&matchMedia('(pointer:fine)').matches){pc.parentElement.addEventListener('pointermove',e=>{const r=pc.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;pc.style.transform=`rotateY(${x*14}deg) rotateX(${-y*10}deg)`;pc.style.setProperty('--shine',(50-x*80)+'%')});pc.parentElement.addEventListener('pointerleave',()=>{pc.style.transform='';});}
+
+// credits
+document.getElementById('credits').innerHTML='Fotos de la imagen y la reliquia: archivo de la peregrinación. Fachadas, Wikimedia Commons: San Francisco el Grande y San Juan de los Reyes, Javier Pérez Montes (CC BY-SA 4.0); San Buenaventura, CarlosVdeHabsburgo (CC BY-SA 4.0); Catedral de Granada, David Suárez Benítez (CC BY-SA 4.0); La Merced de Murcia, Gregorico (CC BY-SA 3.0); La Vila d’Ontinyent, Decar66 (CC BY-SA 3.0 ES); Sant Francesc de Sabadell, Vetranio (CC BY-SA 3.0); San Antonio de Padua de Zaragoza, Zarateman (CC0); Basílica del Pilar, Willtron (CC BY-SA 3.0); Palacio de Cristal, Carlos Delgado (CC BY-SA 3.0).';
+
+// ---------- active step ----------
+let active=0;const hudK=document.getElementById('hudK'),hudC=document.getElementById('hudC');
+const listeners=[];
+function setActive(i){active=i;[...ol.children].forEach((li,k)=>li.classList.toggle('active',k===i));
+ [...dotsEl.children].forEach((d,k)=>{d.className=k<i?'on':k===i?'on cur':''});hudK.textContent=S[i].k+' · '+S[i].when;hudC.textContent=S[i].city;listeners.forEach(f=>f(i));}
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)setActive(+e.target.dataset.i)})},{rootMargin:'-45% 0px -45% 0px'});
+[...ol.children].forEach(li=>io.observe(li));setActive(0);
+
+// ---------- map ----------
+const C40=Math.cos(40*Math.PI/180);
+const stage=document.getElementById('stage');
+fetch('geo.json').then(r=>r.json()).then(geo=>{
+ let ok=false;try{ok=!!window.THREE&&!!document.createElement('canvas').getContext('webgl')}catch(e){}
+ if(ok){try{init3D(geo)}catch(e){console.error(e);init2D(geo)}}else init2D(geo);
+}).catch(()=>{});
+
+function init3D(geo){
+ const T=THREE;const P=(lon,lat,y=0)=>new T.Vector3((lon+3.7)*C40,y,-(lat-40));
+ const canvas=document.getElementById('map3d');
+ const renderer=new T.WebGLRenderer({canvas,antialias:true,powerPreference:'low-power'});
+ renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.1;
+ const scene=new T.Scene();scene.background=new T.Color(0x060c20);scene.fog=new T.FogExp2(0x060c20,.012);
+ const cam=new T.PerspectiveCamera(36,1,.05,600);
+ scene.add(new T.HemisphereLight(0x9fb4ff,0x0a0f22,.9));const sun=new T.DirectionalLight(0xffe2b0,1.6);sun.position.set(-6,12,8);scene.add(sun);
+ const sea=new T.Mesh(new T.PlaneGeometry(400,400),new T.MeshStandardMaterial({color:0x070f26,roughness:.9}));sea.rotation.x=-Math.PI/2;sea.position.y=-.02;scene.add(sea);
+ {const pts=[];for(let lon=-60;lon<=20;lon+=2)for(let lat=-20;lat<56;lat++)pts.push(P(lon,lat),P(lon,lat+1));for(let lat=-20;lat<=56;lat+=2)for(let lon=-60;lon<20;lon++)pts.push(P(lon,lat),P(lon+1,lat));
+  scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(pts),new T.LineBasicMaterial({color:0xd9b76c,transparent:true,opacity:.06})));}
+ const land=new T.MeshStandardMaterial({color:0x1c2d55,roughness:.9});
+ const spain=[new T.MeshStandardMaterial({color:0x3d5a96,roughness:.55,metalness:.2,emissive:0x101c40}),new T.MeshStandardMaterial({color:0x8a6a32,roughness:.5,metalness:.6})];
+ const eD=[],eS=[];const V2=(x,y)=>new T.Vector2((x+3.7)*C40,y-40);
+ for(const c of geo){const es=c.n==='Spain';for(const poly of c.p){if(es&&poly[0][0][1]<30)continue;
+   const sh=new T.Shape(poly[0].map(([x,y])=>V2(x,y)));for(const h of poly.slice(1))sh.holes.push(new T.Path(h.map(([x,y])=>V2(x,y))));
+   const g=es?new T.ExtrudeGeometry(sh,{depth:.16,bevelEnabled:false}):new T.ShapeGeometry(sh);g.rotateX(-Math.PI/2);
+   const m=new T.Mesh(g,es?spain:land);if(!es)m.position.y=.005;scene.add(m);
+   const arr=es?eS:eD,y=es?.165:.01;for(const r of poly)for(let i=0;i<r.length-1;i++)arr.push(P(r[i][0],r[i][1],y),P(r[i+1][0],r[i+1][1],y));}}
+ scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(eD),new T.LineBasicMaterial({color:0xd9b76c,transparent:true,opacity:.22})));
+ scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(eS),new T.LineBasicMaterial({color:0xffe3a0})));
+ const gc=document.createElement('canvas');gc.width=gc.height=64;{const x=gc.getContext('2d');const g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,248,220,1)');g.addColorStop(.25,'rgba(255,220,140,.75)');g.addColorStop(1,'rgba(231,170,80,0)');x.fillStyle=g;x.fillRect(0,0,64,64)}
+ const glowTex=new T.CanvasTexture(gc);const mkGlow=s=>{const sp=new T.Sprite(new T.SpriteMaterial({map:glowTex,transparent:true,depthWrite:false,blending:T.AdditiveBlending}));sp.scale.set(s,s,1);return sp};
+ // arcs
+ const N=120;
+ function arc(a,b,hf,r,y0){const A=P(a[0],a[1],y0),B=P(b[0],b[1],y0);const d=A.distanceTo(B);const M=A.clone().add(B).multiplyScalar(.5);M.y+=d*hf+.15;
+  const cv=new T.QuadraticBezierCurve3(A,M,B);const t1=new T.TubeGeometry(cv,N,r,6,false),t2=new T.TubeGeometry(cv,N,r*3,6,false);
+  scene.add(new T.Mesh(t1,new T.MeshBasicMaterial({color:0xffe3a0})),new T.Mesh(t2,new T.MeshBasicMaterial({color:0xe7a94a,transparent:true,opacity:.25,blending:T.AdditiveBlending,depthWrite:false})));
+  const head=mkGlow(.8);scene.add(head);return {cv,p:0,set(p){this.p=p;const c=Math.floor(N*Math.max(0,Math.min(1,p)))*36;t1.setDrawRange(0,c);t2.setDrawRange(0,c);head.visible=p>.01&&p<.99;head.position.copy(cv.getPoint(Math.min(1,p)))}};}
+ const arcs=[null];for(let i=1;i<S.length;i++)arcs.push(i===1?arc(S[0].ll,S[1].ll,.16,.03,.05):arc(S[i-1].ll,S[i].ll,.2,.03,.18));
+ arcs.forEach(a=>a&&a.set(0));
+ // pins
+ const pins=S.map((s,i)=>{const g=new T.Group();g.position.copy(P(s.ll[0],s.ll[1],i===0?0:.165));
+  const dot=new T.Mesh(new T.SphereGeometry(.1,18,12),new T.MeshStandardMaterial({color:0xffe3a0,emissive:0xb07a20,emissiveIntensity:.8,metalness:.6,roughness:.3}));dot.position.y=.08;
+  const glow=mkGlow(1.1);glow.position.y=.1;const beam=new T.Mesh(new T.CylinderGeometry(.05,.05,2.4,10,1,true),new T.MeshBasicMaterial({color:0xffd98a,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false}));beam.position.y=1.2;
+  const ring=new T.Mesh(new T.RingGeometry(.14,.19,40),new T.MeshBasicMaterial({color:0xffe3a0,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}));ring.rotation.x=-Math.PI/2;ring.position.y=.01;
+  g.add(dot,glow,beam,ring);scene.add(g);return {g,dot,glow,beam,ring,p:g.position}});
+ // labels (merge second Madrid into first)
+ const labWrap=document.getElementById('labels');const labs=S.map((s,i)=>{if(i===9)return null;const d=document.createElement('div');d.className='lbl';d.textContent=s.city;labWrap.appendChild(d);return d});
+ // stars
+ {const n=600,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos[i*3]=(Math.random()-.5)*100;pos[i*3+1]=2+Math.random()*24;pos[i*3+2]=(Math.random()-.5)*100+10}
+  const g=new T.BufferGeometry();g.setAttribute('position',new T.BufferAttribute(pos,3));scene.add(new T.Points(g,new T.PointsMaterial({color:0xffe9b8,size:.06,transparent:true,opacity:.5,depthWrite:false})));}
+
+ const OFF=new T.Vector3(0,0,1.6);
+ const camState={t:P(-3.5,39.6).add(OFF),d:13,az:0,pitch:.98};let goal={...camState,t:camState.t.clone()};
+ function goalFor(i){if(i===0)return {t:P(-12,30,0),d:44,az:.25,pitch:1.05};const c=P(S[i].ll[0],S[i].ll[1]).add(OFF);
+  if(i===10)return {t:P(-2,40.6).add(new T.Vector3(0,0,2)),d:22,az:.15,pitch:1.0};return {t:c,d:11,az:.18*Math.sin(i*1.3),pitch:.98}}
+ let shown=-1;
+ function apply(i){goal=goalFor(i);goal.t=goal.t.clone();if(RM){camState.t.copy(goal.t);Object.assign(camState,{d:goal.d,az:goal.az,pitch:goal.pitch})}shown=i}
+ listeners.push(apply);apply(active);
+ let W=0,H=0;function resize(){const r=stage.getBoundingClientRect();W=r.width;H=r.height;renderer.setSize(W,H,false);cam.aspect=W/H;cam.fov=W/H<.8?44:34;cam.updateProjectionMatrix()}
+ new ResizeObserver(resize).observe(stage);resize();
+ let running=false;new IntersectionObserver(es=>{running=es[0].isIntersecting;if(running)requestAnimationFrame(loop)}).observe(stage);
+ let last=performance.now();const v=new T.Vector3();
+ function loop(now){if(!running)return;const dt=Math.min(.05,(now-last)/1000);last=now;const k=RM?1:1-Math.pow(.04,dt);
+  camState.t.lerp(goal.t,k);camState.d+=(goal.d-camState.d)*k;camState.az+=(goal.az-camState.az)*k;camState.pitch+=(goal.pitch-camState.pitch)*k;
+  const tt=now/1000,az=camState.az+(RM?0:Math.sin(tt*.15)*.05);
+  cam.position.set(camState.t.x+Math.sin(az)*Math.cos(camState.pitch)*camState.d,Math.sin(camState.pitch)*camState.d,camState.t.z+Math.cos(az)*Math.cos(camState.pitch)*camState.d);cam.lookAt(camState.t);cam.updateMatrixWorld();
+  for(let i=1;i<arcs.length;i++){const target=active>=i?1:0;const a=arcs[i];const np=RM?target:a.p+(target-a.p)*Math.min(1,dt*(target>a.p?1.6:4));if(Math.abs(np-a.p)>1e-4||a.p!==target)a.set(Math.abs(np-target)<.002?target:np)}
+  pins.forEach((p,i)=>{const on=i<=active;const cur=i===active;const s=on?1+(cur&&!RM?.15*Math.sin(tt*4):0):.45;p.dot.scale.setScalar(s);p.dot.material.emissiveIntensity=on?.9:.15;p.glow.visible=on;
+   p.beam.material.opacity+=((cur?.5:0)-p.beam.material.opacity)*Math.min(1,dt*3);const rp=(tt*.7)%1;p.ring.material.opacity=cur?(1-rp)*.8:on?.3:0;p.ring.scale.setScalar(cur&&!RM?1+rp*3:1)});
+  labs.forEach((el,i)=>{if(!el)return;v.copy(pins[i].p);v.y+=.35;v.project(cam);const x=(v.x*.5+.5)*W,y=(-v.y*.5+.5)*H;el.style.transform=`translate(${x}px,${y}px) translate(-50%,-100%)`;
+   const vis=v.z<1&&x>0&&x<W&&y>0&&y<H;el.className='lbl'+(vis&&(i<=active||(i===1&&active===9))?' on':'')+((i===active||(i===1&&active===9))?' cur':'')});
+  renderer.render(scene,cam);requestAnimationFrame(loop)}
+}
+
+function init2D(geo){
+ document.getElementById('route').classList.add('nogl');const c=document.getElementById('map2d');c.hidden=false;const x=c.getContext('2d');
+ function draw(){const r=stage.getBoundingClientRect(),dpr=Math.min(devicePixelRatio,2);c.width=r.width*dpr;c.height=r.height*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+  const sc=Math.min(r.width/(13*C40*1.25),r.height/11)*1.1,ox=r.width/2,oy=r.height/2;const pr=([lon,lat])=>[ox+(lon+3.2)*C40*sc,oy-(lat-40)*sc];
+  x.fillStyle='#060c20';x.fillRect(0,0,r.width,r.height);
+  for(const ct of geo)for(const poly of ct.p){x.beginPath();for(const ring of poly)ring.forEach((p,i)=>{const [a,b]=pr(p);i?x.lineTo(a,b):x.moveTo(a,b)});x.fillStyle=ct.n==='Spain'?'#3d5a96':'#1c2d55';x.fill('evenodd');x.strokeStyle=ct.n==='Spain'?'#ffe3a0':'rgba(217,183,108,.25)';x.lineWidth=ct.n==='Spain'?1.2:.6;x.stroke()}
+  x.strokeStyle='#ffe3a0';x.lineWidth=2;x.beginPath();for(let i=1;i<=Math.min(active,10);i++){const [a,b]=pr(S[i].ll);i===1?x.moveTo(a,b):x.lineTo(a,b)}x.stroke();
+  S.forEach((s,i)=>{if(i===0)return;const [a,b]=pr(s.ll);x.beginPath();x.arc(a,b,i===active?7:4,0,7);x.fillStyle=i<=active?'#d9b76c':'rgba(217,183,108,.35)';x.fill()})}
+ listeners.push(draw);new ResizeObserver(draw).observe(stage);draw();
+}
+})();
+</script>
+</body>
+</html>
