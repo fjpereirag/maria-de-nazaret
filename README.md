@@ -2,9 +2,9 @@
 
 Web de la peregrinación de la imagen **María de Nazaret** y la reliquia de la Casa de Nazaret por España (enero – marzo 2027), organizada por el Centro de Tierra Santa (Real Basílica de San Francisco el Grande, Madrid).
 
-- Vigilia mariana: sábado 23 de enero de 2027, 18 h
-- Misa solemne por Tierra Santa (La 2 de RTVE): domingo 24 de enero, 10:30 h
-- Recorrido: Brasília → Madrid → Toledo → Sevilla → Granada → Murcia → Onteniente → Sabadell → Zaragoza → Madrid → San Sebastián
+- Llegada a Madrid: martes 19 de enero de 2027 (una semana en cada casa franciscana)
+- Himno: Ave Clemens (Ave María de Nazaret)
+- Recorrido: Nazaret → México y América → Madrid → Toledo → Sevilla → Granada → Murcia → Onteniente → Sabadell → Zaragoza → Madrid → San Sebastián
 
 ## Publicar en GitHub Pages
 Settings → Pages → Branch `main` / carpeta `/ (root)`.
