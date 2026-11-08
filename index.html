@@ -186,10 +186,9 @@ section{padding-block:var(--section-y);position:relative}
 .lyrics .refrain{font-style:italic;color:var(--gold);font-size:1.45rem}
 .lyrics ol{margin:0;padding-left:1.4rem;display:grid;gap:1rem}
 .lyrics li::marker{font-family:var(--font-display);color:var(--gold)}
-.qrs{display:grid;gap:1.2rem}
-.qr{display:grid;grid-template-columns:120px minmax(0,1fr);gap:1.1rem;align-items:center;padding:1rem;border:1px solid var(--line);background:var(--night-2)}
+.qrs{display:grid;gap:.9rem;align-content:start}
+.qr{display:block;padding:1rem 1.1rem;border:1px solid var(--line);background:var(--night-2)}
 .qr.main{border-color:var(--gold)}
-.qr img{width:120px;height:120px;image-rendering:pixelated}
 .qr b{display:block;font-family:var(--font-display);font-weight:600;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 .qr span{display:block;font-size:1.1rem}
 .qr .row{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.6rem}
@@ -273,7 +272,6 @@ body.noscroll{overflow:hidden}
   .radio-band{padding:.8rem}.radio-band span{font-size:1.08rem}
   .act strong{font-size:1.12rem}.act span{font-size:.95rem}
   .lyrics{font-size:1.1rem}.lyrics .refrain{font-size:1.2rem}
-  .qr{grid-template-columns:96px minmax(0,1fr)}.qr img{width:96px;height:96px}
   .player{width:200px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:150ms!important;animation:none!important}}
@@ -365,9 +363,9 @@ body.noscroll{overflow:hidden}
       </ol>
     </div>
     <div class="qrs">
-      <div class="qr main"><img src="img/qr-original.svg" alt="Código QR de la versión original del himno"><div><b>Versión original</b><span>Escanéalo con el móvil</span><div class="row"><button type="button" data-play="dlVNVML_ScQ">Escuchar aquí</button><a href="https://youtu.be/dlVNVML_ScQ" target="_blank" rel="noopener">YouTube</a></div></div></div>
-      <div class="qr"><img src="img/qr-ninos.svg" alt="Código QR de la versión para niños"><div><b>Versión niños</b><span>Para catequesis y colegios</span><div class="row"><button type="button" data-play="dBZGOrrZd7o">Escuchar aquí</button><a href="https://youtu.be/dBZGOrrZd7o" target="_blank" rel="noopener">YouTube</a></div></div></div>
-      <div class="qr"><img src="img/qr-adultos.svg" alt="Código QR de la versión para adultos"><div><b>Versión adultos</b><span>Para coros y parroquias</span><div class="row"><button type="button" data-play="M2nnf8zHFVc">Escuchar aquí</button><a href="https://youtu.be/M2nnf8zHFVc" target="_blank" rel="noopener">YouTube</a></div></div></div>
+      <div class="qr main"><div><b>Versión original</b><span>La melodía de la peregrinación</span><div class="row"><button type="button" data-play="dlVNVML_ScQ">Escuchar aquí</button><a href="https://youtu.be/dlVNVML_ScQ" target="_blank" rel="noopener">YouTube</a></div></div></div>
+      <div class="qr"><div><b>Versión niños</b><span>Para catequesis y colegios</span><div class="row"><button type="button" data-play="dBZGOrrZd7o">Escuchar aquí</button><a href="https://youtu.be/dBZGOrrZd7o" target="_blank" rel="noopener">YouTube</a></div></div></div>
+      <div class="qr"><div><b>Versión adultos</b><span>Para coros y parroquias</span><div class="row"><button type="button" data-play="M2nnf8zHFVc">Escuchar aquí</button><a href="https://youtu.be/M2nnf8zHFVc" target="_blank" rel="noopener">YouTube</a></div></div></div>
     </div>
   </div>
 </div></section>
