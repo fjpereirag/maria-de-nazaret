@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta property="og:title" content="María de Nazaret peregrina">
 <meta property="og:description" content="La imagen peregrina y la reliquia de la Casa de Nazaret recorren España: una semana con María en cada casa franciscana, de enero a marzo de 2027.">
-<meta property="og:image" content="img/imagen-relicario.jpg">
+<meta property="og:image" content="img/cartel-peregrinacion.jpg">
 <meta name="theme-color" content="#060c20">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 fill=%22%23060c20%22/%3E%3Ctext x=%2216%22 y=%2223%22 font-size=%2220%22 text-anchor=%22middle%22 fill=%22%23d9b76c%22 font-family=%22Georgia%22%3EM%3C/text%3E%3C/svg%3E">
 <title>María de Nazaret peregrina</title>
@@ -86,7 +86,9 @@ p{margin:0;max-width:64ch}
 .date span{font-size:1.05rem;color:var(--muted);display:block}
 .ctas{grid-area:c;display:flex;gap:1rem}
 .hero-img{grid-area:p;margin:0;align-self:center;justify-self:center;width:min(100%,430px)}
-.hero-img img{width:100%;aspect-ratio:2/3;object-fit:cover;object-position:50% 30%;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px var(--line)}
+.hero-img img{width:100%;aspect-ratio:2/3;object-fit:contain;box-shadow:0 40px 90px rgba(0,0,0,.6),0 0 0 1px var(--line)}
+.hero-cap{font-size:.9rem;font-style:italic;color:var(--muted);text-align:center;margin-top:.7rem}
+@media (max-width:760px){.hero-cap{display:none}}
 
 section{padding-block:var(--section-y);position:relative}
 .sec-head{display:grid;gap:1.4rem;margin-bottom:3.2rem}
@@ -120,8 +122,8 @@ section{padding-block:var(--section-y);position:relative}
 .stage{position:sticky;top:var(--nav-h);height:calc(100svh - var(--nav-h));overflow:hidden;background:radial-gradient(ellipse at 50% 40%,var(--night-2),var(--night) 75%)}
 .stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
 .labels{position:absolute;inset:0;pointer-events:none}
-.lbl{position:absolute;left:0;top:0;font-family:var(--font-display);font-weight:600;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-shadow:0 1px 6px #000,0 0 2px #000;white-space:nowrap;opacity:0;transition:opacity .6s}
-.lbl.on{opacity:.9}.lbl.cur{color:var(--gold);opacity:1}
+.lbl{position:absolute;left:0;top:0;font-family:var(--font-display);font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);text-shadow:0 1px 3px #000,0 0 2px #000,0 0 8px rgba(6,12,32,.9);white-space:nowrap;opacity:0;transition:opacity .6s}
+.lbl.on{opacity:.95}.lbl.cur{color:#fff;opacity:1}
 .stage-hud{position:absolute;left:clamp(16px,3vw,32px);bottom:clamp(16px,3vw,32px);right:clamp(16px,3vw,32px);display:flex;justify-content:space-between;align-items:end;gap:1rem;pointer-events:none}
 .hud-now{font-family:var(--font-display);font-weight:600;line-height:1}
 .hud-now small{display:block;font-size:.72rem;letter-spacing:.22em;color:var(--gold);margin-bottom:.5rem}
@@ -300,7 +302,7 @@ body.noscroll{overflow:hidden}
     <div class="date"><b>Una semana en cada casa</b><span>Hasta el 22 de marzo</span></div>
   </div>
   <div class="ctas"><a class="btn" href="#nazaret">Ver el recorrido</a><button class="btn ghost" type="button" id="heroMusic">Escuchar el himno</button></div>
-  <figure class="hero-img"><img src="img/imagen-relicario.jpg" alt="La imagen de María de Nazaret con el relicario de nácar entre dos lamparillas rojas" width="733" height="1100" fetchpriority="high"></figure>
+  <figure class="hero-img"><img src="img/cartel-peregrinacion.jpg" alt="Cartel de la peregrinación María de Nazaret por España, del 19 de enero al 22 de marzo de 2027, con el mapa y las nueve etapas: Madrid, Toledo, Sevilla, Granada, Murcia, Onteniente, Sabadell, Zaragoza y Madrid" width="1080" height="1620" fetchpriority="high"><figcaption class="hero-cap">Cartel de la peregrinación · toca para ampliar</figcaption></figure>
 </div></header>
 
 <section id="nazaret"><div class="wrap">
@@ -496,8 +498,8 @@ function init3D(geo){
  const sea=new T.Mesh(new T.PlaneGeometry(700,700),new T.MeshStandardMaterial({color:0x070f26,roughness:.9}));sea.rotation.x=-Math.PI/2;sea.position.y=-.02;sea.position.x=-40;scene.add(sea);
  {const pts=[];for(let lon=-130;lon<=30;lon+=5)for(let lat=-60;lat<65;lat++)pts.push(P(lon,lat),P(lon,lat+1));for(let lat=-60;lat<=65;lat+=5)for(let lon=-130;lon<30;lon++)pts.push(P(lon,lat),P(lon+1,lat));
   scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(pts),new T.LineBasicMaterial({color:0xd9b76c,transparent:true,opacity:.05})));}
- const land=new T.MeshStandardMaterial({color:0x1c2d55,roughness:.9});
- const hi=[new T.MeshStandardMaterial({color:0x3d5a96,roughness:.55,metalness:.2,emissive:0x101c40}),new T.MeshStandardMaterial({color:0x8a6a32,roughness:.5,metalness:.6})];
+ const land=new T.MeshStandardMaterial({color:0x7a6538,roughness:.9});
+ const hi=[new T.MeshStandardMaterial({color:0xe2bd68,roughness:.55,metalness:.25,emissive:0x3a2a08}),new T.MeshStandardMaterial({color:0x8a6a32,roughness:.5,metalness:.6})];
  const eD=[],eS=[];const V2=(x,y)=>new T.Vector2((x+3.7)*C40,y-40);
  for(const c of geo){const big=c.n==='Spain'||c.n==='Mexico';for(const poly of c.p){if(c.n==='Spain'&&poly[0][0][1]<30)continue;
    const sh=new T.Shape(poly[0].map(([x,y])=>V2(x,y)));for(const h of poly.slice(1))sh.holes.push(new T.Path(h.map(([x,y])=>V2(x,y))));
@@ -505,11 +507,11 @@ function init3D(geo){
    const m=new T.Mesh(g,big?hi:land);if(!big)m.position.y=.005;scene.add(m);
    const arr=big?eS:eD,y=big?(c.n==='Mexico'?.41:.165):.01;for(const r of poly)for(let i=0;i<r.length-1;i++)arr.push(P(r[i][0],r[i][1],y),P(r[i+1][0],r[i+1][1],y));}}
  scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(eD),new T.LineBasicMaterial({color:0xd9b76c,transparent:true,opacity:.22})));
- scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(eS),new T.LineBasicMaterial({color:0xffe3a0})));
- const gc=document.createElement('canvas');gc.width=gc.height=64;{const x=gc.getContext('2d');const g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(255,248,220,1)');g.addColorStop(.25,'rgba(255,220,140,.75)');g.addColorStop(1,'rgba(231,170,80,0)');x.fillStyle=g;x.fillRect(0,0,64,64)}
+ scene.add(new T.LineSegments(new T.BufferGeometry().setFromPoints(eS),new T.LineBasicMaterial({color:0xfff1c8})));
+ const gc=document.createElement('canvas');gc.width=gc.height=64;{const x=gc.getContext('2d');const g=x.createRadialGradient(32,32,0,32,32,32);g.addColorStop(0,'rgba(235,242,255,1)');g.addColorStop(.25,'rgba(96,140,255,.8)');g.addColorStop(1,'rgba(40,80,220,0)');x.fillStyle=g;x.fillRect(0,0,64,64)}
  const glowTex=new T.CanvasTexture(gc);const mkGlow=s=>{const sp=new T.Sprite(new T.SpriteMaterial({map:glowTex,transparent:true,depthWrite:false,blending:T.AdditiveBlending}));sp.scale.set(s,s,1);return sp};
  function tube(cv,N,r,headSize){const t1=new T.TubeGeometry(cv,N,r,6,false),t2=new T.TubeGeometry(cv,N,r*3,6,false);
-  scene.add(new T.Mesh(t1,new T.MeshBasicMaterial({color:0xffe3a0})),new T.Mesh(t2,new T.MeshBasicMaterial({color:0xe7a94a,transparent:true,opacity:.25,blending:T.AdditiveBlending,depthWrite:false})));
+  scene.add(new T.Mesh(t1,new T.MeshBasicMaterial({color:0x1d4ed8})),new T.Mesh(t2,new T.MeshBasicMaterial({color:0x1e3a8a,transparent:true,opacity:.35,depthWrite:false})));
   const head=mkGlow(headSize);scene.add(head);return {p:0,set(p){this.p=p;const c=Math.floor(N*Math.max(0,Math.min(1,p)))*36;t1.setDrawRange(0,c);t2.setDrawRange(0,c);head.visible=p>.01&&p<.99;head.position.copy(cv.getPoint(Math.max(0,Math.min(1,p))))}};}
  function arc(a,b,hf,r,y0,hs){const A=P(a[0],a[1],y0),B=P(b[0],b[1],y0);const d=A.distanceTo(B);const M=A.clone().add(B).multiplyScalar(.5);M.y+=d*hf+.15;return tube(new T.QuadraticBezierCurve3(A,M,B),120,r,hs||.8)}
  // tramo 0: América (México → Sudamérica); tramo 1: vuelo a Madrid; luego España
@@ -520,9 +522,9 @@ function init3D(geo){
  // cuándo se dibuja cada tramo: tramo k completo cuando active>=k
  const pinIdx=S.map((s,i)=>i).filter(i=>i>=1);
  const pins=pinIdx.map(i=>{const s=S[i];const g=new T.Group();g.position.copy(P(s.ll[0],s.ll[1],.165));
-  const dot=new T.Mesh(new T.SphereGeometry(.1,18,12),new T.MeshStandardMaterial({color:0xffe3a0,emissive:0xb07a20,emissiveIntensity:.8,metalness:.6,roughness:.3}));dot.position.y=.08;
-  const glow=mkGlow(1.1);glow.position.y=.1;const beam=new T.Mesh(new T.CylinderGeometry(.05,.05,2.4,10,1,true),new T.MeshBasicMaterial({color:0xffd98a,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false}));beam.position.y=1.2;
-  const ring=new T.Mesh(new T.RingGeometry(.14,.19,40),new T.MeshBasicMaterial({color:0xffe3a0,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}));ring.rotation.x=-Math.PI/2;ring.position.y=.01;
+  const dot=new T.Mesh(new T.SphereGeometry(.1,18,12),new T.MeshStandardMaterial({color:0x2a5bd7,emissive:0x0b2a80,emissiveIntensity:.8,metalness:.4,roughness:.3}));dot.position.y=.08;
+  const glow=mkGlow(.6);glow.position.y=.1;const beam=new T.Mesh(new T.CylinderGeometry(.05,.05,2.4,10,1,true),new T.MeshBasicMaterial({color:0x5b8cff,transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false}));beam.position.y=1.2;
+  const ring=new T.Mesh(new T.RingGeometry(.14,.19,40),new T.MeshBasicMaterial({color:0x1d4ed8,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false}));ring.rotation.x=-Math.PI/2;ring.position.y=.01;
   g.add(dot,glow,beam,ring);scene.add(g);return {i,dot,glow,beam,ring,p:g.position}});
  const mxGlow=mkGlow(6);mxGlow.position.copy(P(-99.1,19.4,.8));scene.add(mxGlow);
  const labWrap=document.getElementById('labels');
@@ -562,10 +564,10 @@ function init2D(geo){
   const amer=active===0;const cx=amer?-75:-3.2,cy=amer?5:40,span=amer?70:13;
   const sc=Math.min(r.width/(span*C40*1.1),r.height/(span*.85)),ox=r.width/2,oy=r.height/2;const pr=([lon,lat])=>[ox+(lon-cx)*C40*sc,oy-(lat-cy)*sc];
   x.fillStyle='#060c20';x.fillRect(0,0,r.width,r.height);
-  for(const ct of geo)for(const poly of ct.p){x.beginPath();for(const ring of poly)ring.forEach((p,i)=>{const [a,b]=pr(p);i?x.lineTo(a,b):x.moveTo(a,b)});const h=ct.n==='Spain'||ct.n==='Mexico';x.fillStyle=h?'#3d5a96':'#1c2d55';x.fill('evenodd');x.strokeStyle=h?'#ffe3a0':'rgba(217,183,108,.25)';x.lineWidth=h?1.2:.6;x.stroke()}
-  x.strokeStyle='#ffe3a0';x.lineWidth=2.5;x.beginPath();AM.forEach((p,i)=>{const [a,b]=pr(p);i?x.lineTo(a,b):x.moveTo(a,b)});if(active>=1){const [a,b]=pr(S[1].ll);x.lineTo(a,b)}
+  for(const ct of geo)for(const poly of ct.p){x.beginPath();for(const ring of poly)ring.forEach((p,i)=>{const [a,b]=pr(p);i?x.lineTo(a,b):x.moveTo(a,b)});const h=ct.n==='Spain'||ct.n==='Mexico';x.fillStyle=h?'#e2bd68':'#7a6538';x.fill('evenodd');x.strokeStyle=h?'#fff1c8':'rgba(217,183,108,.35)';x.lineWidth=h?1.2:.6;x.stroke()}
+  x.strokeStyle='#1d4ed8';x.lineWidth=3;x.beginPath();AM.forEach((p,i)=>{const [a,b]=pr(p);i?x.lineTo(a,b):x.moveTo(a,b)});if(active>=1){const [a,b]=pr(S[1].ll);x.lineTo(a,b)}
   for(let i=2;i<=active;i++){const [a,b]=pr(S[i].ll);x.lineTo(a,b)}x.stroke();
-  S.forEach((s,i)=>{if(i===0)return;const [a,b]=pr(s.ll);x.beginPath();x.arc(a,b,i===active?7:4,0,7);x.fillStyle=i<=active?'#d9b76c':'rgba(217,183,108,.35)';x.fill()})}
+  S.forEach((s,i)=>{if(i===0)return;const [a,b]=pr(s.ll);x.beginPath();x.arc(a,b,i===active?7:4,0,7);x.fillStyle=i<=active?'#1c3f9e':'rgba(28,63,158,.45)';x.fill();x.strokeStyle='#f1e9d6';x.lineWidth=1.5;x.stroke()})}
  listeners.push(draw);new ResizeObserver(draw).observe(stg);draw();
 }
 })();
