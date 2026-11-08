@@ -184,6 +184,12 @@ section{padding-block:var(--section-y);position:relative}
 .hymn{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,5rem);align-items:start}
 .lyrics{display:grid;gap:1.4rem;font-size:1.3rem;line-height:1.5}
 .lyrics .refrain{font-style:italic;color:var(--gold);font-size:1.45rem}
+.refrains{display:grid;gap:1.1rem}
+.rf{display:grid;gap:.3rem;padding-left:1rem;border-left:2px solid var(--gold)}
+.rf b{font-family:var(--font-display);font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.rf.es{border-left-color:var(--line)}
+.rf.es p{font-size:1.05rem;color:var(--muted);font-style:italic}
+.note-sung{font-size:1.05rem;color:var(--muted)}
 .lyrics ol{margin:0;padding-left:1.4rem;display:grid;gap:1rem}
 .lyrics li::marker{font-family:var(--font-display);color:var(--gold)}
 .qrs{display:grid;gap:.9rem;align-content:start}
@@ -354,7 +360,12 @@ body.noscroll{overflow:hidden}
   <div class="sec-head"><div class="kicker">El himno de la peregrinación</div><h2>Ave Clemens</h2><p>«Ave María de Nazaret». Se canta cada día ante la imagen. Pulsa «Himno», arriba, para escucharlo mientras recorres la página.</p></div>
   <div class="hymn">
     <div class="lyrics">
-      <p class="refrain">Dios te salve, compasiva,<br>Dios te salve, gentil,<br>Dios te salve, dulce, oh María,<br>Dios te salve, llena de gracia, oh María.</p>
+      <div class="refrains">
+        <div class="rf"><b>Estribillo · en latín</b><p class="refrain" lang="la">Ave clemens, ave pia, ave dulcis, o Maria!<br>Ave, ave, plena gratia, o Maria.</p></div>
+        <div class="rf"><b>Estribillo · en árabe</b><p class="refrain">As-salám ya hanúna, ya ru’úfa, húlua Maryam,<br>as-salám umm an-ni’ma, ya Maryam.</p></div>
+        <div class="rf es"><b>Traducción</b><p>Dios te salve, compasiva, Dios te salve, gentil,<br>Dios te salve, dulce, oh María,<br>Dios te salve, llena de gracia, oh María.</p></div>
+      </div>
+      <p class="note-sung">El estribillo se canta en latín y en árabe. Las estrofas, en español:</p>
       <ol>
         <li>Salve: a ti al amanecer,<br>salve: a ti al mediodía,<br>salve: a ti la noche. Dios te salve, María.</li>
         <li>Salve: el saludo de Gabriel,<br>resonando desde el cielo,<br>te convirtió en una virgen feliz. Dios te salve, María.</li>
@@ -365,7 +376,7 @@ body.noscroll{overflow:hidden}
     <div class="qrs">
       <div class="qr main"><div><b>Versión original</b><span>La melodía de la peregrinación</span><div class="row"><button type="button" data-play="dlVNVML_ScQ">Escuchar aquí</button><a href="https://youtu.be/dlVNVML_ScQ" target="_blank" rel="noopener">YouTube</a></div></div></div>
       <div class="qr"><div><b>Versión niños</b><span>Para catequesis y colegios</span><div class="row"><button type="button" data-play="dBZGOrrZd7o">Escuchar aquí</button><a href="https://youtu.be/dBZGOrrZd7o" target="_blank" rel="noopener">YouTube</a></div></div></div>
-      <div class="qr"><div><b>Versión adultos</b><span>Para coros y parroquias</span><div class="row"><button type="button" data-play="M2nnf8zHFVc">Escuchar aquí</button><a href="https://youtu.be/M2nnf8zHFVc" target="_blank" rel="noopener">YouTube</a></div></div></div>
+      <div class="qr"><div><b>Presentación del himno</b><span>Para conocer su historia y su sentido</span><div class="row"><button type="button" data-play="I10nPIXTIlM">Ver aquí</button><a href="https://www.youtube.com/watch?v=I10nPIXTIlM" target="_blank" rel="noopener">YouTube</a></div></div></div>
     </div>
   </div>
 </div></section>
