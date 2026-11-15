@@ -184,6 +184,15 @@ section{padding-block:var(--section-y);position:relative}
 .hymn{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(2rem,5vw,5rem);align-items:start}
 .lyrics{display:grid;gap:1.4rem;font-size:1.3rem;line-height:1.5}
 .lyrics .refrain{font-style:italic;color:var(--gold);font-size:1.45rem}
+.chords{line-height:1;font-size:1.25rem}
+.cl{display:inline;}
+.ch{position:relative;display:inline-block;white-space:pre;padding-top:1.2em;margin-bottom:.35em;vertical-align:bottom}
+.ch.sh{display:inline-block;min-width:2.4em}
+.rf.es .chords{font-style:normal;color:var(--ink);font-size:1.15rem}
+.ch::before{content:attr(data-c);position:absolute;left:0;top:0;font-family:var(--font-display);font-weight:700;font-size:.72em;letter-spacing:.02em;color:var(--gold);white-space:nowrap}
+.lyrics ol li{font-size:1.15rem;line-height:1.5}
+.back{display:block;font-style:italic;color:var(--gold);font-size:1rem;margin-top:.2rem}
+.qr audio{width:100%;margin-top:.8rem}
 .refrains{display:grid;gap:1.1rem}
 .rf{display:grid;gap:.3rem;padding-left:1rem;border-left:2px solid var(--gold)}
 .rf b{font-family:var(--font-display);font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
@@ -357,26 +366,25 @@ body.noscroll{overflow:hidden}
 </section>
 
 <section id="himno"><div class="wrap">
-  <div class="sec-head"><div class="kicker">El himno de la peregrinación</div><h2>Ave Clemens</h2><p>«Ave María de Nazaret». Se canta cada día ante la imagen. Pulsa «Himno», arriba, para escucharlo mientras recorres la página.</p></div>
+  <div class="sec-head"><div class="kicker">El himno de la peregrinación</div><h2>Ave Clemens de Nazaret</h2><p>Se canta cada día ante la imagen. El estribillo, en latín, árabe y español; las estrofas, en español. Con los acordes para acompañarlo con guitarra.</p></div>
   <div class="hymn">
     <div class="lyrics">
-      <div class="refrains">
-        <div class="rf"><b>Estribillo · en latín</b><p class="refrain" lang="la">Ave clemens, ave pia, ave dulcis, o Maria!<br>Ave, ave, plena gratia, o Maria.</p></div>
-        <div class="rf"><b>Estribillo · en árabe</b><p class="refrain">As-salám ya hanúna, ya ru’úfa, húlua Maryam,<br>as-salám umm an-ni’ma, ya Maryam.</p></div>
-        <div class="rf es"><b>Traducción</b><p>Dios te salve, compasiva, Dios te salve, gentil,<br>Dios te salve, dulce, oh María,<br>Dios te salve, llena de gracia, oh María.</p></div>
+      <div class="rf"><b>Estribillo · latín</b><p class="chords" lang="la"><span class="cl"><span class="ch" data-c="Re">Ave clemens, ave </span><span class="ch" data-c="Sim">pía, ave </span><span class="ch" data-c="Mim">dulcis, oh </span><span class="ch" data-c="La">María;</span></span><br><span class="cl"><span class="ch" data-c="Sol">Ave, ave, plena </span><span class="ch" data-c="Re">gratia, </span><span class="ch sh" data-c="Mim">oh</span> <span class="ch sh" data-c="Lam">Ma–</span><span class="ch sh" data-c="Re">ría.</span></span></p></div>
+      <div class="rf"><b>Estribillo · árabe</b><p class="refrain">Assalamu ya januna ya ra’ufa hulua Mariam,<br>assalamu uma naima ya Mariam.</p></div>
+      <div class="rf"><b>Estribillo · español</b><p class="refrain">Dios te salve, oh clemente, salve dulce, salve pía.<br>Salve, salve, llena de gracia, oh María.</p></div>
+      <div class="rf es"><b>Estrofas</b>
+        <ol>
+          <li><p class="chords"><span class="cl"><span class="ch" data-c="Re">Salve a </span><span class="ch" data-c="La7">ti al amane</span><span class="ch" data-c="Re">cer,</span></span><br><span class="cl"><span class="ch" data-c="Sol">Salve a </span><span class="ch" data-c="Mim">ti en el medio</span><span class="ch" data-c="La7">día.</span></span><br><span class="cl"><span class="ch" data-c="Sol">Salve, al atar</span><span class="ch" data-c="Re">decer,</span></span><br><span class="cl"><span class="ch" data-c="Sol">Salve, </span><span class="ch" data-c="La7">salve, </span><span class="ch" data-c="Re">María.</span></span></p><span class="back">Ave clemens…</span></li>
+          <li>Salve, en el cielo resuena el saludo de Gabriel.<br>Salve, oh Virgen dichosa. Salve, salve, María.<span class="back">Ave clemens…</span></li>
+          <li>Madre de Dios verdadera, concede a los pueblos paz<br>y el triunfo de la Iglesia. Salve, salve, María.<span class="back">Ave clemens…</span></li>
+          <li>A Cristo Rey la victoria y gloria a la Trinidad,<br>que te colma de alegría. Salve, salve, María.<span class="back">Ave clemens…</span></li>
+        </ol>
       </div>
-      <p class="note-sung">El estribillo se canta en latín y en árabe. Las estrofas, en español:</p>
-      <ol>
-        <li>Salve: a ti al amanecer,<br>salve: a ti al mediodía,<br>salve: a ti la noche. Dios te salve, María.</li>
-        <li>Salve: el saludo de Gabriel,<br>resonando desde el cielo,<br>te convirtió en una virgen feliz. Dios te salve, María.</li>
-        <li>Madre de Dios,<br>concede paz a toda la creación<br>y gloria a la Iglesia. Dios te salve, María.</li>
-        <li>Por Jesucristo Rey es la victoria;<br>honor y gloria para la Trinidad<br>te llenan de gozo. Dios te salve, María.</li>
-      </ol>
     </div>
     <div class="qrs">
-      <div class="qr main"><div><b>Versión original</b><span>La melodía de la peregrinación</span><div class="row"><button type="button" data-play="dlVNVML_ScQ">Escuchar aquí</button><a href="https://youtu.be/dlVNVML_ScQ" target="_blank" rel="noopener">YouTube</a></div></div></div>
-      <div class="qr"><div><b>Versión niños</b><span>Para catequesis y colegios</span><div class="row"><button type="button" data-play="dBZGOrrZd7o">Escuchar aquí</button><a href="https://youtu.be/dBZGOrrZd7o" target="_blank" rel="noopener">YouTube</a></div></div></div>
-      <div class="qr"><div><b>Presentación del himno</b><span>Para conocer su historia y su sentido</span><div class="row"><button type="button" data-play="I10nPIXTIlM">Ver aquí</button><a href="https://www.youtube.com/watch?v=I10nPIXTIlM" target="_blank" rel="noopener">YouTube</a></div></div></div>
+      <div class="qr main"><div><b>Versión española</b><span>Para aprenderlo y cantarlo con la letra y los acordes</span><audio id="esAudio" controls preload="none" src="audio/ave-clemens-espanol.mp3"></audio></div></div>
+      <div class="qr"><div><b>Versión original</b><span>Como se canta en Nazaret</span><div class="row"><button type="button" data-play="dlVNVML_ScQ">Escuchar aquí</button><a href="https://youtu.be/dlVNVML_ScQ" target="_blank" rel="noopener">YouTube</a></div></div></div>
+      <div class="qr"><div><b>Presentación del himno</b><span>La noticia de la Custodia de Tierra Santa</span><div class="row"><button type="button" data-play="I10nPIXTIlM">Ver aquí</button><a href="https://www.youtube.com/watch?v=I10nPIXTIlM" target="_blank" rel="noopener">YouTube</a></div></div></div>
     </div>
   </div>
 </div></section>
@@ -455,11 +463,17 @@ document.querySelector('.nz-pics').addEventListener('click',()=>{if(!nz.classLis
 // ---------- himno ----------
 const musicBtn=document.getElementById('musicBtn'),musicTxt=document.getElementById('musicTxt'),player=document.getElementById('player'),vid=document.getElementById('vid');
 const canEmbed=!/claude\.ai|claudeusercontent|anthropic/.test(location.hostname);
-function play(id){id=id||'dlVNVML_ScQ';
+const esAudio=document.getElementById('esAudio');
+function setOn(on){musicBtn.classList.toggle('on',on);musicBtn.setAttribute('aria-pressed',on?'true':'false');musicTxt.textContent=on?'Sonando':'Himno'}
+function play(id){
+ if(!id){vid.innerHTML='';player.hidden=true;esAudio.loop=true;esAudio.play().catch(()=>{});setOn(true);return}
+ esAudio.pause();
  if(!canEmbed){window.open('https://youtu.be/'+id,'_blank','noopener');return}
- vid.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&loop=1&playlist=${id}&rel=0&playsinline=1" title="Ave Clemens" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
- player.hidden=false;musicBtn.classList.add('on');musicBtn.setAttribute('aria-pressed','true');musicTxt.textContent='Sonando'}
-function stop(){vid.innerHTML='';player.hidden=true;musicBtn.classList.remove('on');musicBtn.setAttribute('aria-pressed','false');musicTxt.textContent='Himno'}
+ vid.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="Ave Clemens" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+ player.hidden=false;setOn(true)}
+function stop(){vid.innerHTML='';player.hidden=true;esAudio.pause();setOn(false)}
+esAudio.addEventListener('play',()=>{vid.innerHTML='';player.hidden=true;setOn(true)});
+esAudio.addEventListener('pause',()=>{if(player.hidden)setOn(false)});
 musicBtn.addEventListener('click',()=>musicBtn.classList.contains('on')?stop():play());
 document.getElementById('heroMusic').addEventListener('click',()=>play());
 document.getElementById('playerClose').addEventListener('click',stop);
